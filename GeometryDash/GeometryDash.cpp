@@ -64,7 +64,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
     // configura o motor
     engine->window->Mode(WINDOWED);
-    engine->window->Size(600, 300);
+    engine->window->Size(900, 450);
     engine->window->Color(30, 50, 80);
     engine->window->Title("Geometry Dash");
     engine->window->Icon(IDI_ICON);
