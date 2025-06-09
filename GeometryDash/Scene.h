@@ -54,14 +54,21 @@ private:
     bool Collision(Point * p, Point * q);       // colisão entre ponto e ponto
     bool Collision(Point * p, Rect * r);        // colisão entre ponto e retângulo    
     bool Collision(Point * p, Circle * c);      // colisão entre ponto e círculo
+    bool Collision(Point * r, Poly * p);        // colisão entre ponto e poligono (inline)
 
     bool Collision(Rect * ra, Rect * rb);       // colisão entre retângulos
     bool Collision(Rect * r, Point * p);        // colisão entre retângulo e ponto (inline)
     bool Collision(Rect * r, Circle * c);       // colisão entre retângulo e círculo
+    bool Collision(Rect * r, Poly * p);        // colisão entre retângulo e poligono (inline)
 
     bool Collision(Circle * ca, Circle * cb);   // colisão entre círculos
     bool Collision(Circle * c, Point * p);      // colisão entre círculo e ponto (inline)
     bool Collision(Circle * c, Rect * r);       // colisão entre círculo e retângulo (inline)
+    bool Collision(Circle * c, Poly * r);       // colisão entre círculo e poligono (inline)
+
+    bool Collision(Poly* c, Point* p);          // colisão entre poligono e ponto 
+    bool Collision(Poly* c, Rect* r);           // colisão entre poligono e retângulo
+    bool Collision(Poly* ca, Circle* cb);       // colisão entre poligono e circulo
 
     bool Collision(Mixed * m, Geometry * s);    // colisão entre geometria mista e uma forma qualquer
     bool Collision(Geometry * s, Mixed * m);    // colisão entre geometria mista e uma forma qualquer (inline)
@@ -93,22 +100,25 @@ public:
 // --------------------------------------------------------------------------------
 // Funções Membro Inline
 
-// colisão entre retângulo e ponto
+inline bool Scene::Collision(Point* r, Poly* p) 
+{ return Collision(p, r); }
+
 inline bool Scene::Collision(Rect* r, Point* p)
 { return Collision(p, r); }
 
-// colisão entre círculo e ponto
+inline bool Scene::Collision(Rect* r, Poly* p)
+{ return Collision(p, r); }
+
 inline bool Scene::Collision(Circle* c, Point* p)
 { return Collision(p, c); }
 
-// colisão entre círculo e retângulo
 inline bool Scene::Collision(Circle* c, Rect* r)
 {     return Collision(r, c); }
 
-// colisão entre geometria mista e uma forma qualquer
+inline bool Scene::Collision(Circle* r, Poly* p)
+{ return Collision(p, r); }
+
 inline bool Scene::Collision(Geometry* s, Mixed* m)
 {     return Collision(m, s); }
-
-// ---------------------------------------------------------------------------------
 
 #endif

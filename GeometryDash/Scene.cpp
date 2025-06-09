@@ -17,6 +17,7 @@
 #include "Scene.h"
 #include "Object.h"
 #include "Engine.h"
+#include <limits>
 
 // ---------------------------------------------------------------------------------
 
@@ -310,6 +311,85 @@ bool Scene::Collision(Circle * ca, Circle * cb)
     return false;
 }
 
+bool Scene::Collision(Poly* c, Point* p)
+{
+    return false;
+}
+
+float dotProduct(const Point& a, const Point& b) {
+    return a.X() * b.X() + a.Y() * b.Y();
+}
+
+Point getNormal(Point& v1, Point& v2) {
+    return { -(v2.Y() - v1.Y()), v2.X() - v1.X()};
+}
+
+float project(const Point vertex, const Point& axis) {
+    float len = sqrt(dotProduct(axis, axis));
+    return dotProduct(vertex, axis) / len;
+}
+
+bool a(Point axis, Poly* c, Poly* polygonB) {
+    float minA = FLT_MAX;
+    float maxA = -FLT_MAX;
+    float minB = FLT_MAX;
+    float maxB = -FLT_MAX;
+
+    for (int i = 0; i < c->vertexCount; i++) {
+        Point p = c->vertexList[i];
+        p.Translate(c->X(), c->Y());
+        float projection = project(p, axis);
+        minA = min(minA, projection);
+        maxA = max(maxA, projection);
+    }
+
+    for (int i = 0; i < polygonB->vertexCount; i++) {
+        float projection = project(polygonB->vertexList[i], axis);
+        minB = min(minB, projection);
+        maxB = max(maxB, projection);
+    }
+
+    if (!(maxA >= minB && minA <= maxB)) {
+        return true; // Separating axis found, no collision 
+    }
+    return false;
+}
+
+bool Scene::Collision(Poly* c, Rect* p)
+{   
+    Point points[4] = {
+        { p->Left(), p->Top() },
+        { p->Left(), p->Bottom() },
+        { p->Right(), p->Bottom() },
+        { p->Right(), p->Top() }
+    };
+    Poly rect = Poly(points, 4);
+    
+    // Test axes from c
+    for (int i = 0; i < c->vertexCount; ++i) {
+        Point v1 = c->vertexList[i];
+        Point v2 = c->vertexList[(i + 1) % c->vertexCount];
+        v1.Translate(c->X(), c->Y());
+        v2.Translate(c->X(), c->Y());
+        if (a(getNormal(v1, v2), c, &rect)) return false;
+    }
+
+    // Test axes from rect 
+    for (int i = 0; i < rect.vertexCount; ++i) {
+        Point v1 = rect.vertexList[i];
+        Point v2 = rect.vertexList[(i + 1) % rect.vertexCount];
+        if (a(getNormal(v1, v2), c, &rect)) return false;
+    }
+
+    return true; // No separating axis found, collision detected
+
+}
+
+bool Scene::Collision(Poly* c, Circle* p)
+{
+    return false;
+}
+
 // --------------------------------------------------------------------------------
 
 bool Scene::Collision(Mixed * m, Geometry * s)
@@ -327,10 +407,11 @@ bool Scene::Collision(Mixed * m, Geometry * s)
         case POINT_T:
             switch (s->Type())
             {
-            case POINT_T:     collision = Collision((Point*)(*i), (Point*)s); break;
+            case POINT_T:     collision = Collision((Point*)(*i), (Point*)s);  break;
             case CIRCLE_T:    collision = Collision((Point*)(*i), (Circle*)s); break;
-            case RECTANGLE_T: collision = Collision((Point*)(*i), (Rect*)s);    break;
-            case MIXED_T:     collision = Collision((Point*)(*i), (Mixed*)s);    break;
+            case RECTANGLE_T: collision = Collision((Point*)(*i), (Rect*)s);   break;
+            case MIXED_T:     collision = Collision((Point*)(*i), (Mixed*)s);  break;
+            case POLYGON_T:   collision = Collision((Point*)(*i), (Poly*)s);   break;
             }
             break;
 
@@ -338,10 +419,11 @@ bool Scene::Collision(Mixed * m, Geometry * s)
         case CIRCLE_T:
             switch (s->Type())
             {
-            case POINT_T:     collision = Collision((Circle*)(*i), (Point*)s); break;
+            case POINT_T:     collision = Collision((Circle*)(*i), (Point*)s);  break;
             case CIRCLE_T:    collision = Collision((Circle*)(*i), (Circle*)s); break;
-            case RECTANGLE_T: collision = Collision((Circle*)(*i), (Rect*)s);    break;
-            case MIXED_T:     collision = Collision((Circle*)(*i), (Mixed*)s);    break;
+            case RECTANGLE_T: collision = Collision((Circle*)(*i), (Rect*)s);   break;
+            case POLYGON_T:   collision = Collision((Circle*)(*i), (Poly*)s);   break;
+            case MIXED_T:     collision = Collision((Circle*)(*i), (Mixed*)s);  break;
             }
             break;
 
@@ -349,10 +431,11 @@ bool Scene::Collision(Mixed * m, Geometry * s)
         case RECTANGLE_T:
             switch (s->Type())
             {
-            case POINT_T:     collision = Collision((Rect*)(*i), (Point*)s); break;
+            case POINT_T:     collision = Collision((Rect*)(*i), (Point*)s);  break;
             case CIRCLE_T:    collision = Collision((Rect*)(*i), (Circle*)s); break;
-            case RECTANGLE_T: collision = Collision((Rect*)(*i), (Rect*)s);    break;
-            case MIXED_T:     collision = Collision((Rect*)(*i), (Mixed*)s);    break;
+            case RECTANGLE_T: collision = Collision((Rect*)(*i), (Rect*)s);   break;
+            case POLYGON_T:   collision = Collision((Rect*)(*i), (Poly*)s);   break;
+            case MIXED_T:     collision = Collision((Rect*)(*i), (Mixed*)s);  break;
             }
             break;
 
@@ -396,6 +479,10 @@ bool Scene::Collision(Object* oa, Object* ob)
             // Point && Rectangle
             return Collision((Point*)oa->BBox(), (Rect*)ob->BBox());
 
+        case POLYGON_T:
+            // Point && Polygon
+            return Collision((Point*)oa->BBox(), (Poly*)ob->BBox());
+
         case MIXED_T:
             // Point && Mixed
             return Collision(oa->BBox(), (Mixed*)ob->BBox());
@@ -422,6 +509,10 @@ bool Scene::Collision(Object* oa, Object* ob)
             // Circle && Rectangle
             return Collision((Circle*)oa->BBox(), (Rect*)ob->BBox());
 
+        case POLYGON_T:
+            // Circle && Polygon
+            return Collision((Circle*)oa->BBox(), (Poly*)ob->BBox());
+
         case MIXED_T:
             // Circle && Mixed
             return Collision(oa->BBox(), (Mixed*)ob->BBox());
@@ -447,6 +538,10 @@ bool Scene::Collision(Object* oa, Object* ob)
         case RECTANGLE_T:
             // Rectangle && Rectangle
             return Collision((Rect*)oa->BBox(), (Rect*)ob->BBox());
+
+        case POLYGON_T:
+            // Rectangle && Polygon
+            return Collision((Rect*)oa->BBox(), (Poly*)ob->BBox());
 
         case MIXED_T:
             // Rectangle && Mixed
