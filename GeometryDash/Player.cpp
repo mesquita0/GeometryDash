@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-    tileset = new TileSet("Resources/g3.png", 67, 51, 4, 16);
+    tileset = new TileSet("Resources/cube.png", 67, 51, 4, 16);
     anim = new Animation(tileset, 0.06f, true);
 
     // cria bounding box
