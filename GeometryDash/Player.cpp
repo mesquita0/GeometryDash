@@ -5,7 +5,7 @@
 Player::Player()
 {
     tileset = new TileSet("Resources/cube.png", 67, 51, 4, 16);
-    anim = new Animation(tileset, 0.06f, true);
+    anim = new Animation(tileset, 0.05f, true);
 
     // cria bounding box
     BBox(new Rect(
@@ -18,6 +18,7 @@ Player::Player()
     level = 0;
     velY = 0;
     run_animation = false;
+    is_alive = true;
 
     // posição inicial
     MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
@@ -34,6 +35,9 @@ void Player::Reset()
     // volta ao estado inicial
     MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
     level = 0;
+    anim->Frame(0);
+    run_animation = false;
+    is_alive = true;
 }
 
 void Player::OnCollision(Object * obj)
@@ -42,6 +46,9 @@ void Player::OnCollision(Object * obj)
     {
         // chegou ao final do nível
         level++;
+    }
+    else if (obj->Type() == OBSTACLE) {
+        is_alive = false;
     }
     else
     {
@@ -54,8 +61,6 @@ void Player::OnCollision(Object * obj)
         run_animation = false;
 
         // mantém personagem em cima da plataforma
-        MoveTo(window->CenterX(), obj->Y() - 32);
-
         velY = 0;
 
         // ----------------------------------------------------------
@@ -83,7 +88,7 @@ void Player::Update()
     Translate(0, -velY * gameTime);
 
     // ação da gravidade sobre o personagem
-    velY -= 700 * gameTime;
+    velY -= 1000 * gameTime;
 
     // atualiza animação
     if (run_animation) anim->NextFrame();

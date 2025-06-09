@@ -3,7 +3,7 @@
 #include "Object.h"                                     // interface de Object
 #include "Sprite.h"                                     // desenho de sprites
 
-enum PlatType { GROUND, FINISH };
+enum PlatType { GROUND, OBSTACLE, FINISH };
 
 class Platform : public Object
 {

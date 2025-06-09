@@ -6,14 +6,26 @@ Platform::Platform(float posX, float posY, PlatType platType, Color tint) : colo
     switch (platType)
     {
     case GROUND: platform = new Sprite("Resources/groundSquare_01_001.png"); break;
+    case OBSTACLE: platform = new Sprite("Resources/obstacle_triangle.png"); break;
     }
 
     width = platform->Width();
     
-    BBox(new Rect(-platform->Width()/2.0f, 
-                  -platform->Height()/2.0f, 
-                   platform->Width()/2.0f, 
-                   platform->Height()/2.0f));
+    if (type == GROUND) {
+        BBox(new Rect(-platform->Width()/2.0f, 
+                      -platform->Height()/2.0f, 
+                       platform->Width()/2.0f, 
+                       platform->Height()/2.0f));
+    }
+    else {
+        float offset = -17.0f;
+        Point points[3] = { 
+            {platform->Width() / 2.0f + offset, offset},
+            {offset, platform->Height() + offset},
+            {platform->Width() + offset, platform->Height() + offset}
+        };
+        BBox(new Poly(points, 3));
+    }
 
     MoveTo(posX, posY, Layer::MIDDLE);
 }

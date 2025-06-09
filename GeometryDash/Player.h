@@ -11,6 +11,7 @@ private:
     float       velY;                   // velocidade vertical
     int         level;                  // nível finalizado
     bool        run_animation;
+    bool        is_alive;
     
 public:
     Player();                           // construtor
@@ -20,6 +21,7 @@ public:
     int Level();                        // último nível finalizado
     float Bottom();                     // coordenadas da base
     float Top();                        // coordenadas do topo
+    bool  IsAlive();
 
     void OnCollision(Object * obj);     // resolução da colisão
     void Update();                      // atualização do objeto
@@ -34,6 +36,8 @@ inline float Player::Bottom()
 
 inline float Player::Top()
 { return y - tileset->Height()/2; }
+
+inline bool Player::IsAlive() { return is_alive; }
 
 inline void Player::Draw()
 { anim->Draw(x, y, z); }

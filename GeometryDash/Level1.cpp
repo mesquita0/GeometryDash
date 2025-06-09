@@ -27,19 +27,38 @@ void Level1::Init()
     scene->Add(GeometryDash::player, MOVING);
 
     // Chão do jogo
+    int ground_level = 390;
     Platform * plat;
     int i = 0;
     while( i < 5200 ) {
-        plat = new Platform(i, 290, GROUND, Color{ 0,0,0.7,1 });
+        plat = new Platform(i, ground_level, GROUND, Color{ 0,0,0.7,1 });
         scene->Add(plat, STATIC);
         i += plat->Width();
     }
+
+    Color white { 1,1,1,1 };
+    plat = new Platform(600, ground_level - 80, OBSTACLE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(800, ground_level - 80, OBSTACLE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(1000, ground_level - 80, OBSTACLE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(1200, ground_level - 80, OBSTACLE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(1400, ground_level - 80, OBSTACLE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(1600, ground_level - 80, OBSTACLE, white);
+    scene->Add(plat, STATIC);
 
     // ----------------------
     // plataformas
     // ----------------------
     /*
-    Color white { 1,1,1,1 };
     float posX, posY;
     uint  platType;
 
@@ -83,7 +102,7 @@ void Level1::Update()
         GeometryDash::NextLevel<Home>();
         GeometryDash::player->Reset();
     }
-    else if (GeometryDash::player->Bottom() < 0 || GeometryDash::player->Top() > window->Height())
+    else if (GeometryDash::player->Bottom() < 0 || GeometryDash::player->Top() > window->Height() || !GeometryDash::player->IsAlive())
     {
         GeometryDash::audio->Stop(MUSIC);
         GeometryDash::NextLevel<GameOver>();
