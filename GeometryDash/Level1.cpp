@@ -20,20 +20,28 @@ void Level1::Init()
     scene = new Scene();
 
     // pano de fundo do jogo
-    backg = new Background(Color{ 1,1,1,1 });
+    backg = new Background(Color{ 0.2,0.2,1,1 });
     scene->Add(backg, STATIC);
 
     // adiciona jogador na cena
     scene->Add(GeometryDash::player, MOVING);
 
+    // Chão do jogo
+    Platform * plat;
+    int i = 0;
+    while( i < 5200 ) {
+        plat = new Platform(i, 290, GROUND, Color{ 0,0,0.7,1 });
+        scene->Add(plat, STATIC);
+        i += plat->Width();
+    }
+
     // ----------------------
     // plataformas
     // ----------------------
-
-    Platform * plat;
+    /*
+    Color white { 1,1,1,1 };
     float posX, posY;
     uint  platType;
-    Color white { 1,1,1,1 };
 
     ifstream fin;
     fin.open("Level1.txt");
@@ -45,7 +53,7 @@ void Level1::Init()
         {
             // lê linha com informações da plataforma
             fin >> posY; fin >> platType;
-            plat = new Platform(posX, 250, platType, white);
+            plat = new Platform(posX, 250, (PlatType) platType, white);
             scene->Add(plat, STATIC);
         }
         else
@@ -59,6 +67,7 @@ void Level1::Init()
         fin >> posX;
     }
     fin.close();
+    */
 
     // inicia com música
     GeometryDash::audio->Frequency(MUSIC, 0.94f);

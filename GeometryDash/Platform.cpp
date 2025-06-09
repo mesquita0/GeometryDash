@@ -1,14 +1,14 @@
 #include "Platform.h"
 
-Platform::Platform(float posX, float posY, uint platType, Color tint) : color(tint)
+Platform::Platform(float posX, float posY, PlatType platType, Color tint) : color(tint)
 {
+    type = platType;
     switch (platType)
     {
-    case SMALL:  platform = new Sprite("Resources/SmallGray.png"); type = SMALL; break;
-    case MEDIUM: platform = new Sprite("Resources/MediumGray.png"); type = MEDIUM; break;
-    case LARGE:  platform = new Sprite("Resources/LongGray.png"); type = LARGE; break;
-    case FINISH: platform = new Sprite("Resources/Finish.png"); type = FINISH; break;
+    case GROUND: platform = new Sprite("Resources/groundSquare_01_001.png"); break;
     }
+
+    width = platform->Width();
     
     BBox(new Rect(-platform->Width()/2.0f, 
                   -platform->Height()/2.0f, 

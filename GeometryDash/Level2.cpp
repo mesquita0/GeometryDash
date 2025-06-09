@@ -44,7 +44,7 @@ void Level2::Init()
         {
             // lê linha com informações da plataforma
             fin >> posY; fin >> platType;
-            plat = new Platform(posX, posY, platType, dark);
+            plat = new Platform(posX, posY, (PlatType) platType, dark);
             scene->Add(plat, STATIC);
         }
         else
