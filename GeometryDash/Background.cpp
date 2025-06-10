@@ -3,56 +3,35 @@
 Background::Background(Color tint) : color(tint)
 {
     MoveTo(window->CenterX(), window->CenterY(), Layer::BACK);
-    xF = xB = x;
 
-    // carrega imagens
+    // carrega imagem
     imgF = new Image("Resources/game_bg_01_001-hd.png");
-    imgB = new Image("Resources/BackgBack.png");
 
-    // cria sprites do plano de fundo
-    sky     = new Sprite("Resources/Sky.png");    
-    backgF1 = new Sprite(imgF);
-    backgF2 = new Sprite(imgF);
-    backgB1 = new Sprite(imgB);
-    backgB2 = new Sprite(imgB);
+    // cria sprites do plano de fundo 
+    backg1 = new Sprite(imgF);
+    backg2 = new Sprite(imgF);
 }
 
 Background::~Background()
 {
     delete imgF;
-    delete imgB;    
-    delete backgF1;
-    delete backgF2;
-    delete backgB1;
-    delete backgB2;
-    delete sky;
+    delete backg1;
+    delete backg2;
 }
 
 void Background::Update()
 {
-    // move sprites com velocidades diferentes
-    xF -= 200 * gameTime;
-    xB -= 150 * gameTime;
+    // move sprites
+    this->Translate(-200 * gameTime, 0);
 }
 
 void Background::Draw()
 {
-    // desenha pano de fundo
-    sky->Draw(window->CenterX(), window->CenterY(), Layer::BACK, 1.0f, 0.0f, color);
-
-    // desenha prédios mais distantes
-    backgB1->Draw(xB, y, Layer::LOWER, 1.0f, 0.0f, color);
-    backgB2->Draw(xB + imgB->Width(), y, Layer::LOWER, 1.0f, 0.0f, color);
-    
-    // traz pano de fundo de volta para dentro da tela
-    if (xB + imgB->Width()/2.0f < 0)
-        xB += imgB->Width();
-
-    // desenha prédios mais próximos
-    backgF1->Draw(xF, y, Layer::MIDDLE, 1.0f, 0.0f, color);
-    backgF2->Draw(xF + imgF->Width(), window->Height()/2.0f, Layer::MIDDLE, 1.0f, 0.0f, color);
+    // desenha plano de fundo
+    backg1->Draw(x, y, Layer::MIDDLE, 1.0f, 0.0f, color);
+    backg2->Draw(x + imgF->Width(), window->Height()/2.0f, Layer::MIDDLE, 1.0f, 0.0f, color);
 
     // traz pano de fundo de volta para dentro da tela
-    if (xF + imgF->Width()/2.0f < 0)
-        xF += imgF->Width();
+    if (x + imgF->Width()/2.0f < 0)
+        this->Translate(imgF->Width(), 0);
 }
