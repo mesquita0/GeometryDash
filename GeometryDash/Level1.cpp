@@ -36,6 +36,8 @@ void Level1::Init()
         i += plat->Width();
     }
 
+    GeometryDash::player->MoveTo(100, ground_level - GeometryDash::player->Height() / 2.0);
+
     Color white { 1,1,1,1 };
     plat = new Platform(600, ground_level - 80, OBSTACLE, white);
     scene->Add(plat, STATIC);
@@ -53,6 +55,9 @@ void Level1::Init()
     scene->Add(plat, STATIC);
 
     plat = new Platform(1600, ground_level - 80, OBSTACLE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(1800, ground_level - 72, OBSTACLE_SMALL, white);
     scene->Add(plat, STATIC);
 
     // ----------------------
