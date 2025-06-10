@@ -30,12 +30,17 @@ void GeometryDash::Init()
 
 void GeometryDash::Update()
 {
-    // habilita/desabilita visualização da bounding box
-    if (window->KeyPress('B'))
-        viewBBox = !viewBBox;    
+    if (window->KeyPress('P'))
+        is_paused = !is_paused;
 
-    // atualiza nível
-    level->Update();
+    if (!is_paused) {
+        // habilita/desabilita visualização da bounding box
+        if (window->KeyPress('B'))
+            viewBBox = !viewBBox;
+
+        // atualiza nível
+        level->Update();
+    }
 } 
 
 void GeometryDash::Draw()

@@ -21,6 +21,7 @@ public:
     int Level();                        // último nível finalizado
     float Bottom();                     // coordenadas da base
     float Top();                        // coordenadas do topo
+    float Height();                        
     bool  IsAlive();
 
     void OnCollision(Object * obj);     // resolução da colisão
@@ -36,6 +37,8 @@ inline float Player::Bottom()
 
 inline float Player::Top()
 { return y - tileset->Height()/2; }
+
+inline float Player::Height() { return tileset->Height(); }
 
 inline bool Player::IsAlive() { return is_alive; }
 

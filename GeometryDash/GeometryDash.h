@@ -10,6 +10,7 @@ class GeometryDash : public Game
 {
 private:
     static Game * level;            // nível atual do jogo
+    bool is_paused;
 
 public:
     static Player * player;         // jogador 
