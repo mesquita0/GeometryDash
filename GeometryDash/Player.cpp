@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "GeometryDash.h"
-#include "Platform.h"
+#include "WorldEntity.h"
 
 Player::Player()
 {
@@ -19,6 +19,7 @@ Player::Player()
     velY = 0;
     run_animation = false;
     is_alive = true;
+    end_level = false;
 
     // posição inicial
     MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
@@ -38,6 +39,13 @@ void Player::Reset()
     anim->Frame(0);
     run_animation = false;
     is_alive = true;
+    end_level = false;
+}
+
+void Player::Reset(int level)
+{
+    Reset();
+    this->level = level;
 }
 
 void Player::OnCollision(Object * obj)
@@ -47,7 +55,10 @@ void Player::OnCollision(Object * obj)
         // chegou ao final do nível
         level++;
     }
-    else if (obj->Type() == OBSTACLE) {
+    else if (obj->Type() == FINISH_BEFORE) {
+        end_level = true;
+    }
+    else if (obj->Type() == THORN || obj->Type() == SMALL_THORN) {
         is_alive = false;
     }
     else
@@ -60,8 +71,10 @@ void Player::OnCollision(Object * obj)
         }
         run_animation = false;
 
-        // mantém personagem em cima da plataforma
         velY = 0;
+
+        // mantém personagem em cima da plataforma
+        MoveTo(x, obj->Y() - ((WorldEntity*)obj)->Height() / 2.0f - (tileset->TileHeight() - 16) / 2.0f);
 
         // ----------------------------------------------------------
         // Processa teclas pressionadas
@@ -86,6 +99,9 @@ void Player::OnCollision(Object * obj)
 void Player::Update()
 {
     Translate(0, -velY * gameTime);
+
+    if (end_level) 
+        Translate(250 * gameTime, 0);
 
     // ação da gravidade sobre o personagem
     velY -= 1000 * gameTime;

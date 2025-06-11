@@ -1,4 +1,5 @@
 #include "Background.h"
+#include "GeometryDash.h"
 
 Background::Background(Color tint) : color(tint)
 {
@@ -22,7 +23,8 @@ Background::~Background()
 void Background::Update()
 {
     // move sprites
-    this->Translate(-200 * gameTime, 0);
+    if (!GeometryDash::player->IsEndLevel())
+        this->Translate(-50 * gameTime, 0);
 }
 
 void Background::Draw()

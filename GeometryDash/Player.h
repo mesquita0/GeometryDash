@@ -12,17 +12,20 @@ private:
     int         level;                  // nível finalizado
     bool        run_animation;
     bool        is_alive;
+    bool        end_level;
     
 public:
     Player();                           // construtor
     ~Player();                          // destrutor
 
     void Reset();                       // volta ao estado inicial
-    int Level();                        // último nível finalizado
+    void Reset(int level);              
+    int Level();                        // último nível finalizado                     
     float Bottom();                     // coordenadas da base
     float Top();                        // coordenadas do topo
     float Height();                        
     bool  IsAlive();
+    bool  IsEndLevel();
 
     void OnCollision(Object * obj);     // resolução da colisão
     void Update();                      // atualização do objeto
@@ -41,6 +44,8 @@ inline float Player::Top()
 inline float Player::Height() { return tileset->Height(); }
 
 inline bool Player::IsAlive() { return is_alive; }
+
+inline bool Player::IsEndLevel() { return end_level; }
 
 inline void Player::Draw()
 { anim->Draw(x, y, z); }
