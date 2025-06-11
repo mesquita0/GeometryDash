@@ -3,14 +3,16 @@
 #include "Audio.h"
 #include "Player.h"
 #include "Resources.h"
+#include <vector>
 
 enum Sounds {MENU, MUSIC, TRANSITION};
 
 class GeometryDash : public Game
 {
 private:
-    static Game * level;            // nível atual do jogo
-    bool is_paused;
+    static std::vector<Game*> levels;
+    static Game * current_level;            // nível atual do jogo
+    static int    level_index;
 
 public:
     static Player * player;         // jogador 
@@ -22,15 +24,6 @@ public:
     void Draw();                    // desenha jogo
     void Finalize();                // finaliza jogo
 
-    template<class T>
-    static void NextLevel()         // muda para próximo nível do jogo
-    {
-        if (level)
-        {
-            level->Finalize();
-            delete level;
-            level = new T();
-            level->Init();
-        }
-    };
+    static void NextLevel();        // muda para próximo nível do jogo
+    static void GameOverL();
 };

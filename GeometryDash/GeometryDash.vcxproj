@@ -166,10 +166,10 @@
     <ClCompile Include="GeometryDash.cpp" />
     <ClCompile Include="Home.cpp" />
     <ClCompile Include="Image.cpp" />
-    <ClCompile Include="Level1.cpp" />
-    <ClCompile Include="Level2.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="WorldEntity.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -193,10 +193,10 @@
     <ClInclude Include="GeometryDash.h" />
     <ClInclude Include="Home.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="Level1.h" />
-    <ClInclude Include="Level2.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="Platform.h" />
+    <ClInclude Include="WorldEntity.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Resources.h" />
