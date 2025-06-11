@@ -60,6 +60,36 @@ void Level1::Init()
     plat = new Platform(1800, ground_level - 72, OBSTACLE_SMALL, white);
     scene->Add(plat, STATIC);
 
+    plat = new Platform(2000, ground_level - 80, SQUARE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(2118, ground_level - 80, SQUARE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(2118, ground_level - 110, SQUARE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(2242, ground_level - 80, SQUARE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(2242, ground_level - 110, SQUARE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(2242, ground_level - 140, SQUARE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(2400, ground_level - 140, SQUARE, white);
+    scene->Add(plat, STATIC);
+    
+    plat = new Platform(2430, ground_level - 140, SQUARE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(2460, ground_level - 140, SQUARE, white);
+    scene->Add(plat, STATIC);
+
+    plat = new Platform(2490, ground_level - 140, SQUARE, white);
+    scene->Add(plat, STATIC);
+
     // ----------------------
     // plataformas
     // ----------------------

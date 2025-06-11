@@ -8,6 +8,7 @@ Platform::Platform(float posX, float posY, PlatType platType, Color tint) : colo
     case GROUND: platform = new Sprite("Resources/groundSquare_01_001.png"); break;
     case OBSTACLE: platform = new Sprite("Resources/obstacle_triangle.png"); break;
     case OBSTACLE_SMALL: platform = new Sprite("Resources/obstacle_small_triangle.png"); break;
+    case SQUARE: platform = new Sprite("Resources/square.png"); break;
     }
 
     width = platform->Width();
