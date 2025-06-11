@@ -28,6 +28,9 @@ void Level::Init()
 
 void Level::Update()
 {
+    scene->Update();
+    scene->CollisionDetection();
+
     if (GeometryDash::player->Bottom() < 0 || GeometryDash::player->Top() > window->Height() || !GeometryDash::player->IsAlive())
     {
         GeometryDash::audio->Stop(MUSIC);
@@ -38,12 +41,7 @@ void Level::Update()
     {
         GeometryDash::player->Reset(n);
         GeometryDash::NextLevel();
-    }
-    else
-    {
-        scene->Update();
-        scene->CollisionDetection();
-    }    
+    } 
 }
 
 void Level::Draw()

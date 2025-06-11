@@ -85,7 +85,10 @@ void loadLevel(Level& level, Window* window, const std::string& path) {
             fin >> entityType;
             entity = new WorldEntity(posX, posY, (EntityType)entityType, white);
             entity->Translate(0, -1.0f * entity->Height() / 2.0f);
+
             level.scene->Add(entity, STATIC);
+            if (entityType == SQUARE)
+                level.scene->Add(new WorldEntity(posX, entity->Y(), SQUARE_SIDE, white), STATIC);
         }
         else
         {

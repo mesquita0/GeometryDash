@@ -58,10 +58,10 @@ void Player::OnCollision(Object * obj)
     else if (obj->Type() == FINISH_BEFORE) {
         end_level = true;
     }
-    else if (obj->Type() == THORN || obj->Type() == SMALL_THORN) {
+    else if (obj->Type() == THORN || obj->Type() == SMALL_THORN || obj->Type() == SQUARE_SIDE) {
         is_alive = false;
     }
-    else
+    else if (obj->Type() == GROUND || obj->Type() == SQUARE)
     {
         // Setar frame para um de não rotação
         if (run_animation) {

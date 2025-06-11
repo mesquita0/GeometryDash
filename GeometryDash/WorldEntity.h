@@ -3,7 +3,7 @@
 #include "Object.h"                                     // interface de Object
 #include "Sprite.h"                                     // desenho de sprites
 
-enum EntityType { GROUND, THORN, SMALL_THORN, SQUARE, FINISH_BEFORE, FINISH };
+enum EntityType { GROUND, THORN, SMALL_THORN, SQUARE, SQUARE_SIDE, FINISH_BEFORE, FINISH };
 
 class WorldEntity : public Object
 {

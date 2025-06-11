@@ -24,6 +24,14 @@ WorldEntity::WorldEntity(float posX, float posY, EntityType platType, Color tint
                        entity->Width()/2.0f, 
                        entity->Height()/2.0f));
     }
+    else if (type == SQUARE_SIDE) {
+        int square_side = 34;
+
+        BBox(new Rect(-square_side/2.0f, 
+                      -square_side/2.0f + 7, 
+                       -square_side/2.0f, 
+                       square_side/2.0f));
+    }
     else if (type == THORN || type == SMALL_THORN) {
         Point points[3] = { 
             {-entity->Width() / 2.0f, entity->Height() / 2.0f},
