@@ -11,7 +11,7 @@ void GameOver::Init()
 void GameOver::Update()
 {
     if (window->KeyPress(VK_ESCAPE) || window->KeyPress(VK_RETURN))
-        GeometryDash::NextLevel<Home>();
+        GeometryDash::NextLevel();
 }
 
 void GameOver::Draw()

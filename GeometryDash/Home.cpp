@@ -1,7 +1,7 @@
 #include "Engine.h"
 #include "GeometryDash.h"
 #include "Home.h"
-#include "Level1.h"
+#include "Level.h"
 
 void Home::Init()
 {
@@ -21,7 +21,8 @@ void Home::Update()
     if (window->KeyPress(VK_RETURN))
     {
         GeometryDash::audio->Stop(MENU);
-        GeometryDash::NextLevel<Level1>();
+        GeometryDash::player->Reset(0);
+        GeometryDash::NextLevel();
     }
     else
     {

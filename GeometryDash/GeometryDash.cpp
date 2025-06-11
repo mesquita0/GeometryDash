@@ -1,10 +1,13 @@
-#include "Engine.h"
 #include "GeometryDash.h"
+#include "Engine.h"
 #include "Home.h"
 #include "GameOver.h"
+#include "Level.h"
 #include "Player.h"
 
-Game*   GeometryDash::level = nullptr;
+std::vector<Game*> GeometryDash::levels = {};
+Game*   GeometryDash::current_level = nullptr;
+int     GeometryDash::level_index = 0;
 Player* GeometryDash::player = nullptr;
 Audio*  GeometryDash::audio = nullptr;
 bool    GeometryDash::viewBBox = false;
@@ -23,40 +26,60 @@ void GeometryDash::Init()
     // cria jogador
     player = new Player();
 
+    // cria níveis
+    levels = {
+        new Home(),
+        new Level(1),
+        new Level(2),
+        new GameOver(),
+    };
+
     // inicializa nível de abertura do jogo
-    level = new Home();
-    level->Init();
+    current_level = levels[0];
+    current_level->Init();
 }
 
 void GeometryDash::Update()
 {
-    if (window->KeyPress('P'))
-        is_paused = !is_paused;
+    // habilita/desabilita visualização da bounding box
+    if (window->KeyPress('B'))
+        viewBBox = !viewBBox;
 
-    if (!is_paused) {
-        // habilita/desabilita visualização da bounding box
-        if (window->KeyPress('B'))
-            viewBBox = !viewBBox;
-
-        // atualiza nível
-        level->Update();
-    }
+    // atualiza nível
+    current_level->Update();
 } 
 
 void GeometryDash::Draw()
 {
     // desenha nível
-    level->Draw();
+    current_level->Draw();
 } 
 
 void GeometryDash::Finalize()
 {
-    level->Finalize();
+    current_level->Finalize();
 
     delete player;
     delete audio;
-    delete level;
+
+    for (auto level : levels) delete level;
 }
+
+void GeometryDash::NextLevel() 
+{
+    current_level->Finalize();
+    level_index = (level_index + 1) % levels.size();
+    current_level = levels[level_index];
+    current_level->Init();
+};
+
+void GeometryDash::GameOverL()
+{
+    current_level->Finalize();
+    level_index = levels.size() - 1;
+    current_level = levels[level_index];
+    current_level->Init();
+};
 
 
 // ------------------------------------------------------------------------------

@@ -4,13 +4,16 @@
 #include "Player.h"
 #include "Background.h"
 
-class Level1 : public Game
+class Level : public Game
 {
 private:
-    Background* backg = nullptr;   // pano de fundo animado
+    int n;
 
 public:
+    Background* backg = nullptr;   // pano de fundo animado
     static Scene* scene;           // cena do nível
+
+    Level(int level_number);
 
     void Init();                    // inicialização do nível
     void Update();                  // atualiza lógica do jogo
