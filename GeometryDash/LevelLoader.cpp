@@ -62,7 +62,7 @@ void loadLevel(Level& level, Window* window, const std::string& path) {
     level.scene->Add(GeometryDash::player, MOVING);
     GeometryDash::player->MoveTo(100, ground_level - GeometryDash::player->Height() / 2.0f);
 
-    float posX;
+    float posX, posY;
     uint  entityType;
 
     // Carrega entidades do jogo
@@ -71,9 +71,19 @@ void loadLevel(Level& level, Window* window, const std::string& path) {
     {
         if (fin.good())
         {
+            // Pega a posição y da entidade
+            while (fin.peek() == ' ') fin.get();
+            if (std::isdigit(fin.peek())) {
+                fin >> posY;
+            }
+            else {
+                posY = ground_level;
+                fin.get();
+            }
+
             // Lê linha com informações da entidade
             fin >> entityType;
-            entity = new WorldEntity(posX, ground_level, (EntityType)entityType, white);
+            entity = new WorldEntity(posX, posY, (EntityType)entityType, white);
             entity->Translate(0, -1.0f * entity->Height() / 2.0f);
             level.scene->Add(entity, STATIC);
         }

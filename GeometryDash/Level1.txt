@@ -7,18 +7,31 @@
 // Informações sobre o chão do level
 // Componentes RGB entre 0 e 1
 // groundLevel    length   color_R  color_G  color_B
-           350      2000         0        0      0.7
+           350      3000         0        0      0.7
 
 
 // Informações sobre as entidades do mundo
+// posY: 
+//            g - groundLevel
 // EntityType:
 //            1 - Espinho
 //            2 - Espinho pequeno
+//            3 - Quadrado
 //
-//  posX       EntityType
-    600        1
-    766        2
-    800        1
-    1000       1
-    1200       1
-    1400       1
+//  posX    posY   EntityType
+    600        g            1
+    766        g            2
+    800        g            1
+    1000       g            1
+    1200       g            1
+    1400       g            1
+    2000       g            3
+    2118       g            3
+    2118     320            3
+    2242       g            3
+    2242     320            3
+    2242     290            3
+    2400     290            3
+    2430     290            3
+    2460     290            3
+    2490     290            3

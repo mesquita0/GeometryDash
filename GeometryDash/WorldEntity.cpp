@@ -9,6 +9,7 @@ WorldEntity::WorldEntity(float posX, float posY, EntityType platType, Color tint
     case GROUND: entity = new Sprite("Resources/groundSquare_01_001.png"); break;
     case THORN: entity = new Sprite("Resources/obstacle_triangle.png"); break;
     case SMALL_THORN: entity = new Sprite("Resources/obstacle_small_triangle.png"); break;
+    case SQUARE: entity = new Sprite("Resources/square.png"); break;
     default: entity = nullptr;
     }
 
@@ -17,7 +18,7 @@ WorldEntity::WorldEntity(float posX, float posY, EntityType platType, Color tint
         height = entity->Height();
     }
     
-    if (type == GROUND) {
+    if (type == GROUND || type == SQUARE) {
         BBox(new Rect(-entity->Width()/2.0f, 
                       -entity->Height()/2.0f, 
                        entity->Width()/2.0f, 

@@ -14,11 +14,12 @@
 // EntityType:
 //            1 - Espinho
 //            2 - Espinho pequeno
+//            3 - Quadrado
 //
-//  posX       EntityType
-    600        1
-    766        2
-    800        1
-    1000       1
-    1200       1
-    1400       1
+//  posX    posY   EntityType
+    600        g            1
+    766        g            2
+    800        g            1
+    1000       g            1
+    1200       g            1
+    1400       g            1
