@@ -22,7 +22,6 @@ void Level::Init()
 
     // inicia com música
     GeometryDash::audio->Frequency(MUSIC, 0.94f);
-    GeometryDash::audio->Frequency(TRANSITION, 1.0f);
     GeometryDash::audio->Play(MUSIC);
 }
 
@@ -34,6 +33,7 @@ void Level::Update()
     if (GeometryDash::player->Bottom() < 0 || GeometryDash::player->Top() > window->Height() || !GeometryDash::player->IsAlive())
     {
         GeometryDash::audio->Stop(MUSIC);
+        GeometryDash::audio->Play(DIED);
         GeometryDash::GameOverL();
         GeometryDash::player->Reset();
     }

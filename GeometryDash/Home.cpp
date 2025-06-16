@@ -21,6 +21,7 @@ void Home::Update()
     if (window->KeyPress(VK_RETURN))
     {
         GeometryDash::audio->Stop(MENU);
+        GeometryDash::audio->Play(TRANSITION);
         GeometryDash::player->Reset(0);
         GeometryDash::NextLevel();
     }

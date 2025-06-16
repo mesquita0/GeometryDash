@@ -18,6 +18,7 @@ void GeometryDash::Init()
     audio = new Audio();
     audio->Add(MENU, "Resources/Menu.wav");
     audio->Add(MUSIC, "Resources/Music.wav");
+    audio->Add(DIED, "Resources/Died.wav");
     audio->Add(TRANSITION, "Resources/Transition.wav");
 
     // bounding box não visível

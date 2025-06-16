@@ -85,9 +85,6 @@ void Player::OnCollision(Object * obj)
 
         if (window->KeyDown(VK_SPACE))
         {
-            // toca efeito sonoro
-            GeometryDash::audio->Play(TRANSITION);
-
             // Ação Pulo
             velY = 350;
 

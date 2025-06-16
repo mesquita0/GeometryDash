@@ -5,7 +5,7 @@
 #include "Resources.h"
 #include <vector>
 
-enum Sounds {MENU, MUSIC, TRANSITION};
+enum Sounds {MENU, MUSIC, DIED, TRANSITION};
 
 class GeometryDash : public Game
 {
