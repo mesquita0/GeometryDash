@@ -49,7 +49,7 @@ void loadLevel(Level& level, Window* window, const std::string& path) {
     fin >> cB;
     int i = 0;
     while (i < (length + window->Width())) {
-        entity = new WorldEntity(i, ground_level, GROUND, Color{ cR, cG, cB, 1 });
+        entity = new WorldEntity(i, ground_level, GROUND1, Color{ cR, cG, cB, 1 });
         entity->Translate(0, entity->Height() / 2.0f);
         level.scene->Add(entity, STATIC);
         i += entity->Width();
@@ -83,12 +83,12 @@ void loadLevel(Level& level, Window* window, const std::string& path) {
 
             // Lê linha com informações da entidade
             fin >> entityType;
-            entity = new WorldEntity(posX, posY, (EntityType)entityType, white);
+            entity = new WorldEntity(posX, posY, (EntityTypeSprite)entityType, white);
             entity->Translate(0, -1.0f * entity->Height() / 2.0f);
 
             level.scene->Add(entity, STATIC);
-            if (entityType == SQUARE)
-                level.scene->Add(new WorldEntity(posX, entity->Y(), SQUARE_SIDE, white), STATIC);
+            if (entity->Type() == BLOCK)
+                level.scene->Add(new WorldEntity(posX, entity->Y(), BLOCK_SIDE, white), STATIC);
         }
         else
         {

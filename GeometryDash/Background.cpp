@@ -6,7 +6,7 @@ Background::Background(Color tint) : color(tint)
     MoveTo(window->CenterX(), window->CenterY(), Layer::BACK);
 
     // carrega imagem
-    imgF = new Image("Resources/game_bg_01_001-hd.png");
+    imgF = new Image("Resources/Backgrounds/game_bg_01_001-hd.png");
 
     // cria sprites do plano de fundo 
     backg1 = new Sprite(imgF);

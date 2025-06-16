@@ -11,15 +11,43 @@
 
 
 // Informações sobre as entidades do mundo
+// posY: 
+//            g - groundLevel
 // EntityType:
-//            1 - Espinho
-//            2 - Espinho pequeno
-//            3 - Quadrado
+//            1 - Espinho (1)
+//            2 - Espinho (2)
+//            3 - Espinho Invertido (1)
+//            4 - Espinho Invertido (2)
+//            5 - Espinho pequeno (1)
+//            6 - Espinho pequeno (2)
+//            7 - Fila de espinhos (1)
+//            8 - Fila de espinhos (2)
+//            9 - Fila de espinhos (3)
+//            10 - Fila de espinhos (4)
+//            11 - Fila de espinhos (4)
+//            12 - Bloco (Grid)
+//            13 - Bloco (1)
+//            14 - Bloco (2)
+//            15 - Bloco (3)
+//            16 - Bloco (4)
+//            17 - Bloco (5)
+//            18 - Jump Pad (amarelo)
+//            19 - Jump Ring (amarelo)
 //
 //  posX    posY   EntityType
     600        g            1
-    766        g            2
+    766        g            3
     800        g            1
     1000       g            1
     1200       g            1
     1400       g            1
+    2000       g            10
+    2166       g            10
+    2166     318            10
+    2332       g            10
+    2332     318            10
+    2332     286            10
+    2500     286            10
+    2530     286            10
+    2560     286            10
+    2590     286            10

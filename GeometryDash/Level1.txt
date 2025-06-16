@@ -14,24 +14,38 @@
 // posY: 
 //            g - groundLevel
 // EntityType:
-//            1 - Espinho
-//            2 - Espinho pequeno
-//            3 - Quadrado
+//            1 - Espinho (1)
+//            2 - Espinho (2)
+//            3 - Espinho Invertido (1)
+//            4 - Espinho Invertido (2)
+//            5 - Espinho pequeno (1)
+//            6 - Espinho pequeno (2)
+//            7 - Fila de espinhos (1)
+//            8 - Fila de espinhos (2)
+//            9 - Fila de espinhos (3)
+//            10 - Bloco (Grid)
+//            11 - Bloco (1)
+//            12 - Bloco (2)
+//            13 - Bloco (3)
+//            14 - Bloco (4)
+//            15 - Bloco (5)
+//            16 - Jump Pad (amarelo)
+//            17 - Jump Ring (amarelo)
 //
 //  posX    posY   EntityType
     600        g            1
-    766        g            2
+    766        g            16
     800        g            1
     1000       g            1
     1200       g            1
     1400       g            1
-    2000       g            3
-    2166       g            3
-    2166     316            3
-    2332       g            3
-    2332     316            3
-    2332     282            3
-    2500     282            3
-    2530     282            3
-    2560     282            3
-    2590     282            3
+    2000       g            10
+    2166       g            10
+    2166     318            10
+    2332       g            10
+    2332     318            10
+    2332     286            10
+    2500     286            10
+    2530     286            10
+    2560     286            10
+    2590     286            10

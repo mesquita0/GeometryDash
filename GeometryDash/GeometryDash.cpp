@@ -16,10 +16,10 @@ void GeometryDash::Init()
 {
     // cria sistema de áudio
     audio = new Audio();
-    audio->Add(MENU, "Resources/Menu.wav");
-    audio->Add(MUSIC, "Resources/Music.wav");
-    audio->Add(DIED, "Resources/Died.wav");
-    audio->Add(TRANSITION, "Resources/Transition.wav");
+    audio->Add(MENU, "Resources/sfx/Menu.wav");
+    audio->Add(MUSIC, "Resources/sfx/Music.wav");
+    audio->Add(DIED, "Resources/sfx/Died.wav");
+    audio->Add(TRANSITION, "Resources/sfx/Transition.wav");
 
     // bounding box não visível
     viewBBox = false;

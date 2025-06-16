@@ -53,26 +53,37 @@ void Player::Reset(int level)
 
 void Player::OnCollision(Object * obj)
 {
-    if (obj->Type() == FINISH)
+    if (obj->Type() == _FINISH)
     {
         // chegou ao final do nível
         level++;
     }
-    else if (obj->Type() == FINISH_BEFORE) {
+    else if (obj->Type() == _FINISH_BEFORE) {
         end_level = true;
     }
-    else if (obj->Type() == THORN || obj->Type() == SMALL_THORN || obj->Type() == SQUARE_SIDE) {
+    else if (obj->Type() == THORN || obj->Type() == INVERTED_THORN || obj->Type() == THORN_PIT || obj->Type() == _BLOCK_SIDE) {
         is_alive = false;
     }
-    else if (obj->Type() == GROUND || obj->Type() == SQUARE)
+    else if (obj->Type() == JUMP_PAD) {
+        velY = 500;
+        run_animation = true;
+    }
+    else if (obj->Type() == JUMP_RING) {
+        if (window->KeyDown(VK_SPACE))
+        {
+            velY = 350;
+            run_animation = true;
+        }
+    }
+    else if (obj->Type() == GROUND || obj->Type() == BLOCK)
     {
         // Setar frame para um de não rotação
         if (run_animation) {
-            if (rotation <= 0.05 || rotation > 3 * M_PI / 2)
+            if (rotation <= 0.1 || rotation > 0.1 + 3 * M_PI / 2)
                 rotation = 0;
-            else if (rotation - M_PI / 2 <= 0.05)
+            else if (rotation - M_PI / 2 <= 0.1)
                 rotation = M_PI / 2;
-            else if (rotation - M_PI <= 0.05)
+            else if (rotation - M_PI <= 0.1)
                 rotation = M_PI;
             else
                 rotation = 3 * M_PI / 2;
@@ -118,5 +129,4 @@ void Player::Update()
         if (rotation > 2 * M_PI)
             rotation -= 2 * M_PI;
     }
-    //if (run_animation) anim->NextFrame();
 }
