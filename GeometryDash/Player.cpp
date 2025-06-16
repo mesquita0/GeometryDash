@@ -2,21 +2,25 @@
 #include "GeometryDash.h"
 #include "WorldEntity.h"
 
+#ifndef M_PI
+#   define M_PI 3.1415926535897932384626433832
+#endif 
+
 Player::Player()
 {
-    tileset = new TileSet("Resources/cube.png", 67, 51, 4, 16);
-    anim = new Animation(tileset, 0.05f, true);
+    sprite = new Sprite("Resources/cube.png");
 
     // cria bounding box
     BBox(new Rect(
-        -1.0f * (tileset->TileWidth() - 30) / 2.0f + 1,
-        -1.0f * (tileset->TileHeight() - 14) / 2.0f - 1,
-        (tileset->TileWidth() - 30) / 2.0f + 1,
-        (tileset->TileHeight() - 14) / 2.0f - 1));
+        -1.0f * (sprite->Width()) / 2.0f,
+        -1.0f * (sprite->Height()) / 2.0f,
+        (sprite->Width()) / 2.0f,
+        (sprite->Height()) / 2.0f));
     
     // inicializa estado do player
     level = 0;
     velY = 0;
+    rotation = 0;
     run_animation = false;
     is_alive = true;
     end_level = false;
@@ -27,8 +31,7 @@ Player::Player()
 
 Player::~Player()
 {
-    delete anim;
-    delete tileset;    
+    delete sprite;
 }
 
 void Player::Reset()
@@ -36,7 +39,7 @@ void Player::Reset()
     // volta ao estado inicial
     MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
     level = 0;
-    anim->Frame(0);
+    rotation = 0;
     run_animation = false;
     is_alive = true;
     end_level = false;
@@ -65,16 +68,21 @@ void Player::OnCollision(Object * obj)
     {
         // Setar frame para um de não rotação
         if (run_animation) {
-            int frames_to_finish_animation = (anim->Frame() % 4);
-            if (frames_to_finish_animation != 0) 
-                anim->Frame(anim->Frame() + (4 - frames_to_finish_animation));
+            if (rotation <= 0.05 || rotation > 3 * M_PI / 2)
+                rotation = 0;
+            else if (rotation - M_PI / 2 <= 0.05)
+                rotation = M_PI / 2;
+            else if (rotation - M_PI <= 0.05)
+                rotation = M_PI;
+            else
+                rotation = 3 * M_PI / 2;
         }
         run_animation = false;
 
         velY = 0;
 
         // mantém personagem em cima da plataforma
-        MoveTo(x, obj->Y() - ((WorldEntity*)obj)->Height() / 2.0f - (tileset->TileHeight() - 16) / 2.0f);
+        MoveTo(x, obj->Y() - ((WorldEntity*)obj)->Height() / 2.0f - (sprite->Height()) / 2.0f);
 
         // ----------------------------------------------------------
         // Processa teclas pressionadas
@@ -104,5 +112,11 @@ void Player::Update()
     velY -= 1000 * gameTime;
 
     // atualiza animação
-    if (run_animation) anim->NextFrame();
+    if (run_animation) {
+        rotation += M_PI / 30;
+
+        if (rotation > 2 * M_PI)
+            rotation -= 2 * M_PI;
+    }
+    //if (run_animation) anim->NextFrame();
 }

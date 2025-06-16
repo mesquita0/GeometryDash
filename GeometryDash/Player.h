@@ -6,10 +6,10 @@
 class Player : public Object
 {
 private:
-    TileSet   * tileset;                // folha de sprites do personagem
-    Animation * anim;                   // animação do personagem
+    Sprite    * sprite;                 // animação do personagem
     float       velY;                   // velocidade vertical
     int         level;                  // nível finalizado
+    float       rotation;
     bool        run_animation;
     bool        is_alive;
     bool        end_level;
@@ -36,16 +36,16 @@ inline int Player::Level()
 { return level; }
 
 inline float Player::Bottom()
-{ return y + tileset->Height()/2; }
+{ return y + sprite->Height()/2; }
 
 inline float Player::Top()
-{ return y - tileset->Height()/2; }
+{ return y - sprite->Height()/2; }
 
-inline float Player::Height() { return tileset->Height(); }
+inline float Player::Height() { return sprite->Height(); }
 
 inline bool Player::IsAlive() { return is_alive; }
 
 inline bool Player::IsEndLevel() { return end_level; }
 
 inline void Player::Draw()
-{ anim->Draw(x, y, z); }
+{ sprite->Draw(x, y, z, 1.0f, rotation); }
