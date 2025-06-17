@@ -1,4 +1,5 @@
 #pragma once
+#include "Font.h"
 #include "Game.h"
 #include "Sprite.h"
 
@@ -12,7 +13,9 @@ private:
     Sprite * empty_bar = nullptr;
     Color  * progress_bar_color = nullptr;
     Color  * empty_bar_color = nullptr;
+    Font   * font = nullptr;
     float progress_barX;
+    float playerPercentage;
 
 public:
     void Init();                    // inicialização do nível
