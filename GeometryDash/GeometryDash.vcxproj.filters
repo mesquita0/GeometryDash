@@ -188,6 +188,9 @@
     <ClInclude Include="LevelLoader.h">
       <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Game\Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Vertex.hlsl">
@@ -212,5 +215,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
+    <None Include="Resources\cursor.ani">
+      <Filter>Game\Arquivos de Recurso</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Icon.ico">
+      <Filter>Game\Arquivos de Recurso</Filter>
+    </Image>
   </ItemGroup>
 </Project>
