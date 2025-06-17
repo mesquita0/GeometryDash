@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>C:\Users\breno\OneDrive\Documentos\faculdade\5º periodo\jogos\jogo-1\GeometryDash\Debug\GeometryDash.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>C:\Users\breno\OneDrive\Documentos\faculdade\5º periodo\jogos\jogo-1\GeometryDash\GeometryDash\Shaders\Pixel.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\breno\OneDrive\Documentos\faculdade\5º periodo\jogos\jogo-1\GeometryDash\GeometryDash\Shaders\Vertex.cso</FullPath>
+    </ContentFile>
+  </ContentFiles>
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>
