@@ -11,6 +11,7 @@ int     GeometryDash::level_index = 0;
 Player* GeometryDash::player = nullptr;
 Audio*  GeometryDash::audio = nullptr;
 bool    GeometryDash::viewBBox = false;
+int     GeometryDash::game_speed = 250;
 
 void GeometryDash::Init() 
 {

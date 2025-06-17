@@ -25,6 +25,8 @@ Player::Player()
     run_animation = false;
     is_alive = true;
     end_level = false;
+    points = 0;
+    max_points = 1;
 
     // posição inicial
     MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
@@ -46,6 +48,7 @@ void Player::Reset()
     run_animation = false;
     is_alive = true;
     end_level = false;
+    points = 0;
 }
 
 void Player::Reset(int level)
@@ -60,6 +63,7 @@ void Player::OnCollision(Object * obj)
     {
     case _FINISH:
         level++;
+        points = max_points;
         break;
 
     case _FINISH_BEFORE:
@@ -126,8 +130,10 @@ void Player::Update()
 {
     Translate(0, -velY * gameTime);
 
+    float dx = GeometryDash::game_speed * gameTime;
+    points += dx;
     if (end_level) 
-        Translate(250 * gameTime, 0);
+        Translate(dx, 0);
 
     // ação da gravidade sobre o personagem
     velY += gravity * 1000 * gameTime;

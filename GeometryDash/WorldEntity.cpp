@@ -90,5 +90,5 @@ WorldEntity::~WorldEntity()
 void WorldEntity::Update()
 {
     if (!GeometryDash::player->IsEndLevel())
-        Translate(-250.0f * gameTime, 0);
+        Translate(-GeometryDash::game_speed * gameTime, 0);
 }
