@@ -31,11 +31,21 @@
 //            15 - Bloco (5)
 //            16 - Jump Pad (amarelo)
 //            17 - Jump Ring (amarelo)
+//            18 - Portal gravidade invertida
+//            19 - Portal gravidade normal
 //
 //  posX    posY   EntityType
     600        g            1
-    766        g            16
-    800        g            1
+    766        g            18
+    800       100            10
+    830       100            10
+    860       100            10
+    890       100            10
+    920       100            10
+    950       100            10
+    980       100            10
+    1200      100            10
+    1400      200            19
     1000       g            1
     1200       g            1
     1400       g            1

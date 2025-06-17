@@ -3,7 +3,20 @@
 #include "Object.h"                                     // interface de Object
 #include "Sprite.h"                                     // desenho de sprites
 
-enum EntityType { GROUND, THORN, INVERTED_THORN, THORN_PIT, BLOCK, _BLOCK_SIDE, JUMP_PAD, JUMP_RING, _FINISH_BEFORE, _FINISH };
+enum EntityType { 
+    GROUND, 
+    THORN, 
+    INVERTED_THORN, 
+    THORN_PIT, 
+    BLOCK, 
+    _BLOCK_SIDE, 
+    JUMP_PAD, 
+    JUMP_RING, 
+    GRAVITY_PORTAL_UP, 
+    GRAVITY_PORTAL_DOWN, 
+    _FINISH_BEFORE, 
+    _FINISH 
+};
 
 enum EntityTypeSprite {
     GROUND1,
@@ -24,6 +37,8 @@ enum EntityTypeSprite {
     BLOCK5,
     JUMP_PAD1,
     JUMP_RING1,
+    GRAVITY_PORTAL1,
+    GRAVITY_PORTAL2,
     BLOCK_SIDE,
     FINISH_BEFORE,
     FINISH
