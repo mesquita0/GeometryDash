@@ -25,6 +25,7 @@ public:
 
     void Reset();                       // volta ao estado inicial
     void Reset(int level);              
+    void ResetPoints();
     int Level();                        // último nível finalizado                     
     void Level(int level);                                          
     float Bottom();                     // coordenadas da base
@@ -33,6 +34,7 @@ public:
     float Width();                        
     bool  IsAlive();
     bool  IsEndLevel();
+    float percentage();
 
     void maxPoints(float max_points);
 
@@ -43,6 +45,9 @@ public:
 
 inline void Player::jump(int velocity)
 { velY = -gravity * velocity; run_animation = true; }
+
+inline void Player::ResetPoints()
+{ points = 0; }
 
 inline int Player::Level()
 { return level; }
@@ -63,6 +68,9 @@ inline float Player::Width() { return sprite->Width(); }
 inline bool Player::IsAlive() { return is_alive; }
 
 inline bool Player::IsEndLevel() { return end_level; }
+
+inline float Player::percentage()
+{ return points / max_points; }
 
 inline void Player::maxPoints(float max_points) 
 { this->max_points = max_points; }

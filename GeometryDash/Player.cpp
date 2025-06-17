@@ -48,7 +48,6 @@ void Player::Reset()
     run_animation = false;
     is_alive = true;
     end_level = true;
-    points = 0;
 }
 
 void Player::Reset(int level)

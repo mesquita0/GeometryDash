@@ -22,6 +22,7 @@ void Level::Init()
 
     loadLevel(*this, window, "Level" + std::to_string(n) + ".txt");
     GeometryDash::player->Level(n - 1);
+    GeometryDash::player->ResetPoints();
 
     // inicia com música
     GeometryDash::audio->Frequency(MUSIC, 0.94f);
