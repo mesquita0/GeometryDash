@@ -18,6 +18,7 @@ public:
     static Player * player;         // jogador 
     static Audio * audio;           // sistema de áudio
     static bool viewBBox;           // estado da bounding box
+    static int game_speed;
 
     void Init();                    // inicializa jogo
     void Update();                  // atualiza lógica do jogo

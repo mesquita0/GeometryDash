@@ -14,6 +14,8 @@ private:
     bool        run_animation;
     bool        is_alive;
     bool        end_level;
+    float        points;
+    float        max_points;
     
     void jump(int velocity);
 
@@ -29,6 +31,8 @@ public:
     float Height();                        
     bool  IsAlive();
     bool  IsEndLevel();
+
+    void maxPoints(float max_points);
 
     void OnCollision(Object * obj);     // resolução da colisão
     void Update();                      // atualização do objeto
@@ -52,6 +56,9 @@ inline float Player::Height() { return sprite->Height(); }
 inline bool Player::IsAlive() { return is_alive; }
 
 inline bool Player::IsEndLevel() { return end_level; }
+
+inline void Player::maxPoints(float max_points) 
+{ this->max_points = max_points; }
 
 inline void Player::Draw()
 { sprite->Draw(x, y, z, 1.0f, rotation); }
