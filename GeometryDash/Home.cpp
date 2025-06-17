@@ -16,6 +16,7 @@ Home::Home(Level* level1) {
 void Home::Init()
 {
     level1->Init();
+    GeometryDash::audio->Stop(MUSIC);
 
     title = new Sprite("Resources/Title.png");
     play = new Sprite("Resources/PressEnter.png");
@@ -65,4 +66,5 @@ void Home::Finalize()
     delete tileset;
 
     level1->scene->Add(GeometryDash::player, MOVING);
+    GeometryDash::audio->Play(MUSIC, true);
 }
