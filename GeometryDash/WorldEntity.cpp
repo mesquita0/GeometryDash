@@ -25,7 +25,8 @@ WorldEntity::WorldEntity(float posX, float posY, EntityTypeSprite platType, Colo
     case JUMP_RING1:      type = JUMP_RING;           entity = new Sprite("Resources/Transporter/YellowJumpRing.png"); break;
     case GRAVITY_PORTAL1: type = GRAVITY_PORTAL_UP;   entity = new Sprite("Resources/Portal/GravityPortalUp.png"); break;
     case GRAVITY_PORTAL2: type = GRAVITY_PORTAL_DOWN; entity = new Sprite("Resources/Portal/GravityPortalDown.png"); break;
-    case FINISH_BEFORE:   type = _FINISH_BEFORE; break;
+    case STOP_CAMERA:     type = _STOP_CAMERA; break;
+    case MOVE_CAMERA:     type = _MOVE_CAMERA; break;
     case BLOCK_SIDE:      type = _BLOCK_SIDE; break;
     case FINISH:          type = _FINISH; break;
     }
@@ -70,7 +71,8 @@ WorldEntity::WorldEntity(float posX, float posY, EntityTypeSprite platType, Colo
         BBox(new Poly(points, 3));
         break;
 
-    case _FINISH_BEFORE:
+    case _STOP_CAMERA:
+    case _MOVE_CAMERA:
     case _FINISH:
         BBox(new Rect(-10,
             -posY,
@@ -89,6 +91,16 @@ WorldEntity::~WorldEntity()
 
 void WorldEntity::Update()
 {
-    if (!GeometryDash::player->IsEndLevel())
+    // Home
+    if (GeometryDash::level_index == 0) {
+        // Move apenas objetos na visão
+        if (entity && this->x - entity->Width() / 2.0f < window->Width())
+            Translate(-GeometryDash::game_speed * gameTime, 0);
+
+        // Retorna objetos que sairam da tela
+        if (entity && this->x + entity->Width() / 2.0f < 0)
+            Translate(8 * entity->Width(), 0);
+    }
+    else if(!GeometryDash::player->IsEndLevel())
         Translate(-GeometryDash::game_speed * gameTime, 0);
 }

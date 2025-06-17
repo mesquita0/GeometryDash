@@ -35,9 +35,6 @@
 //            19 - Portal gravidade normal
 //
 //  posX    posY   EntityType
-    600        g            1
-    768        g            5
-    800        g            1
     1000       g           10
     1034       g           10
     1068       g           10

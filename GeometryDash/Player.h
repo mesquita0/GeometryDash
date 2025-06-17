@@ -26,9 +26,11 @@ public:
     void Reset();                       // volta ao estado inicial
     void Reset(int level);              
     int Level();                        // último nível finalizado                     
+    void Level(int level);                                          
     float Bottom();                     // coordenadas da base
     float Top();                        // coordenadas do topo
     float Height();                        
+    float Width();                        
     bool  IsAlive();
     bool  IsEndLevel();
 
@@ -45,6 +47,9 @@ inline void Player::jump(int velocity)
 inline int Player::Level()
 { return level; }
 
+inline void Player::Level(int level)
+{ this->level = level; }
+
 inline float Player::Bottom()
 { return y + sprite->Height()/2; }
 
@@ -52,6 +57,8 @@ inline float Player::Top()
 { return y - sprite->Height()/2; }
 
 inline float Player::Height() { return sprite->Height(); }
+
+inline float Player::Width() { return sprite->Width(); }
 
 inline bool Player::IsAlive() { return is_alive; }
 

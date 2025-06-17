@@ -58,13 +58,19 @@ void loadLevel(Level& level, Window* window, const std::string& path) {
         i += entity->Width();
     }
 
-    level.scene->Add(new WorldEntity(length - window->Width() - 20, ground_level, FINISH_BEFORE, white), STATIC);
+    level.scene->Add(new WorldEntity(player_start_offset, ground_level, MOVE_CAMERA, white), STATIC);
+    level.scene->Add(new WorldEntity(length - window->Width() - 40, ground_level, STOP_CAMERA, white), STATIC);
     level.scene->Add(new WorldEntity(length - finish_offset, ground_level, FINISH, white), STATIC);
 
     // Adiciona jogador na cena
     level.scene->Add(GeometryDash::player, MOVING);
-    GeometryDash::player->MoveTo(player_start_offset, ground_level - GeometryDash::player->Height() / 2.0f);
     GeometryDash::player->maxPoints(length - finish_offset - player_start_offset);
+
+    // Jogador começa no chão e fora da tela
+    GeometryDash::player->MoveTo(
+        -GeometryDash::player->Width() / 2.0f,
+        ground_level - GeometryDash::player->Height() / 2.0f
+    );
 
     float posX, posY;
     uint  entityType;

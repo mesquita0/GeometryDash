@@ -24,7 +24,7 @@ Player::Player()
     rotation = 0;
     run_animation = false;
     is_alive = true;
-    end_level = false;
+    end_level = true;
     points = 0;
     max_points = 1;
 
@@ -47,7 +47,7 @@ void Player::Reset()
     rotation = 0;
     run_animation = false;
     is_alive = true;
-    end_level = false;
+    end_level = true;
     points = 0;
 }
 
@@ -66,8 +66,12 @@ void Player::OnCollision(Object * obj)
         points = max_points;
         break;
 
-    case _FINISH_BEFORE:
+    case _STOP_CAMERA:
         end_level = true;
+        break;
+
+    case _MOVE_CAMERA:
+        end_level = false;
         break;
 
     case THORN:

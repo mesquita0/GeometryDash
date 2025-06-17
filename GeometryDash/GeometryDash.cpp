@@ -29,9 +29,10 @@ void GeometryDash::Init()
     player = new Player();
 
     // cria níveis
+    Level* level1 = new Level(1);
     levels = {
-        new Home(),
-        new Level(1),
+        new Home(level1),
+        level1,
         new Level(2),
         new GameOver(),
     };

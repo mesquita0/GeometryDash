@@ -14,7 +14,8 @@ enum EntityType {
     JUMP_RING, 
     GRAVITY_PORTAL_UP, 
     GRAVITY_PORTAL_DOWN, 
-    _FINISH_BEFORE, 
+    _STOP_CAMERA, 
+    _MOVE_CAMERA,
     _FINISH 
 };
 
@@ -40,7 +41,8 @@ enum EntityTypeSprite {
     GRAVITY_PORTAL1,
     GRAVITY_PORTAL2,
     BLOCK_SIDE,
-    FINISH_BEFORE,
+    STOP_CAMERA,
+    MOVE_CAMERA,
     FINISH
 };
 

@@ -15,10 +15,13 @@ Level::Level(int level_number) : n(level_number) {}
 
 void Level::Init()
 {
+    if (scene) return;
+        
     // cria gerenciador de cena
     scene = new Scene();
 
     loadLevel(*this, window, "Level" + std::to_string(n) + ".txt");
+    GeometryDash::player->Level(n - 1);
 
     // inicia com música
     GeometryDash::audio->Frequency(MUSIC, 0.94f);
@@ -57,4 +60,5 @@ void Level::Finalize()
 {
     scene->Remove(GeometryDash::player, MOVING);
     delete scene;
+    scene = nullptr;
 }

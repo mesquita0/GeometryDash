@@ -22,9 +22,9 @@ Background::~Background()
 
 void Background::Update()
 {
-    // move sprites
-    if (!GeometryDash::player->IsEndLevel())
-        this->Translate(-50 * gameTime, 0);
+    // move sprites 
+    if (!GeometryDash::player->IsEndLevel() || GeometryDash::level_index == 0)
+        this->Translate(-(GeometryDash::game_speed / 5.0f) * gameTime, 0);
 }
 
 void Background::Draw()

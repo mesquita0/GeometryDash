@@ -7,18 +7,19 @@
 #include "Scene.h"
 #include "Player.h"
 #include "Background.h"
+#include "Level.h"
 
 class Home : public Game
 {
 private:
-    Sprite* title = nullptr;   // pano de fundo animado 
+    Sprite* title = nullptr;
     Sprite* play = nullptr;
-    Background* backg = nullptr;   // pano de fundo animado
     TileSet* tileset = nullptr;    // tileset da animação
     Animation* anim = nullptr;     // animação do menu
+    Level* level1 = nullptr;
 
 public:
-    static Scene* scene;
+    Home(Level* level1);
 
     void Init();                    // inicia nível
     void Update();                  // atualiza lógica do jogo

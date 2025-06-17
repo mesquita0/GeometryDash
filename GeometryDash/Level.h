@@ -7,9 +7,9 @@
 class Level : public Game
 {
 private:
-    int n;
 
 public:
+    int n;
     Background* backg = nullptr;   // pano de fundo animado
     static Scene* scene;           // cena do nível
 
