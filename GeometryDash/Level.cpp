@@ -35,7 +35,7 @@ void Level::Update()
         GeometryDash::audio->Stop(MUSIC);
         GeometryDash::audio->Play(DIED);
         GeometryDash::GameOverL();
-        GeometryDash::player->Reset();
+        GeometryDash::player->Reset(n-1); 
     }
     else if (GeometryDash::player->Level() != n - 1 || window->KeyPress('N'))
     {

@@ -5,7 +5,12 @@
 
 void GameOver::Init()
 {
-    title = new Sprite("Resources/GameOver.png");
+    if (GeometryDash::player->Level() == 0) {
+        title = new Sprite("Resources/GameOver1.png");
+    }
+    else {
+        title = new Sprite("Resources/GameOver2.png");
+    }
 }
 
 void GameOver::Update()
