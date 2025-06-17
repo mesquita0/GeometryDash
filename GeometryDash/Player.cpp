@@ -20,6 +20,7 @@ Player::Player()
     // inicializa estado do player
     level = 0;
     velY = 0;
+    gravity = -1;
     rotation = 0;
     run_animation = false;
     is_alive = true;
@@ -39,6 +40,8 @@ void Player::Reset()
     // volta ao estado inicial
     MoveTo(window->CenterX(), 24.0f, Layer::FRONT);
     level = 0;
+    velY = 0;
+    gravity = -1;
     rotation = 0;
     run_animation = false;
     is_alive = true;
@@ -53,30 +56,44 @@ void Player::Reset(int level)
 
 void Player::OnCollision(Object * obj)
 {
-    if (obj->Type() == _FINISH)
+    switch (obj->Type())
     {
-        // chegou ao final do nível
+    case _FINISH:
         level++;
-    }
-    else if (obj->Type() == _FINISH_BEFORE) {
+        break;
+
+    case _FINISH_BEFORE:
         end_level = true;
-    }
-    else if (obj->Type() == THORN || obj->Type() == INVERTED_THORN || obj->Type() == THORN_PIT || obj->Type() == _BLOCK_SIDE) {
+        break;
+
+    case THORN:
+    case INVERTED_THORN:
+    case THORN_PIT:
+    case _BLOCK_SIDE:
         is_alive = false;
-    }
-    else if (obj->Type() == JUMP_PAD) {
-        velY = 500;
-        run_animation = true;
-    }
-    else if (obj->Type() == JUMP_RING) {
+        break;
+
+    case JUMP_PAD:
+        jump(500);
+        break;
+
+    case JUMP_RING:
         if (window->KeyDown(VK_SPACE))
-        {
-            velY = 350;
-            run_animation = true;
-        }
-    }
-    else if (obj->Type() == GROUND || obj->Type() == BLOCK)
-    {
+            jump(350);
+        break;
+
+    case GRAVITY_PORTAL_UP:
+        gravity = 1;
+        if (velY <= 0) velY = gravity * 1000 * gameTime;
+        break;
+
+    case GRAVITY_PORTAL_DOWN:
+        gravity = -1;
+        if (velY >= 0) velY = gravity * 1000 * gameTime;
+        break;
+
+    case BLOCK:
+    case GROUND:
         // Setar frame para um de não rotação
         if (run_animation) {
             if (rotation <= 0.1 || rotation > 0.1 + 3 * M_PI / 2)
@@ -90,25 +107,18 @@ void Player::OnCollision(Object * obj)
         }
         run_animation = false;
 
-        velY = 0;
+        if (velY * gravity >= 0)
+            velY = 0;
 
         // mantém personagem em cima da plataforma
-        MoveTo(x, obj->Y() - ((WorldEntity*)obj)->Height() / 2.0f - (sprite->Height()) / 2.0f);
-
-        // ----------------------------------------------------------
-        // Processa teclas pressionadas
-        // ----------------------------------------------------------
-        // jogador só pode pular enquanto estiver 
-        // em cima de uma plataforma
-        // ----------------------------------------------------------
+        if (gravity == -1 && velY == 0)
+            MoveTo(x, obj->Y() - ((WorldEntity*)obj)->Height() / 2.0f - (sprite->Height()) / 2.0f);
+        else if (gravity == 1 && velY == 0)
+            MoveTo(x, obj->Y() + ((WorldEntity*)obj)->Height() / 2.0f + (sprite->Height()) / 2.0f);
 
         if (window->KeyDown(VK_SPACE))
-        {
-            // Ação Pulo
-            velY = 350;
-
-            run_animation = true;
-        }
+            jump(350);
+        break;
     }
 }
 
@@ -120,11 +130,11 @@ void Player::Update()
         Translate(250 * gameTime, 0);
 
     // ação da gravidade sobre o personagem
-    velY -= 1000 * gameTime;
+    velY += gravity * 1000 * gameTime;
 
     // atualiza animação
     if (run_animation) {
-        rotation += M_PI / 30;
+        rotation += 2 * gameTime * M_PI;
 
         if (rotation > 2 * M_PI)
             rotation -= 2 * M_PI;

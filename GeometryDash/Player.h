@@ -9,11 +9,14 @@ private:
     Sprite    * sprite;                 // animação do personagem
     float       velY;                   // velocidade vertical
     int         level;                  // nível finalizado
+    int         gravity;
     float       rotation;
     bool        run_animation;
     bool        is_alive;
     bool        end_level;
     
+    void jump(int velocity);
+
 public:
     Player();                           // construtor
     ~Player();                          // destrutor
@@ -31,6 +34,9 @@ public:
     void Update();                      // atualização do objeto
     void Draw();                        // desenho do objeto
 };
+
+inline void Player::jump(int velocity)
+{ velY = -gravity * velocity; run_animation = true; }
 
 inline int Player::Level()
 { return level; }
