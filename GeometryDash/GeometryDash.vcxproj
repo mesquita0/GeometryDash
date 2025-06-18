@@ -196,7 +196,6 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="WorldEntity.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />

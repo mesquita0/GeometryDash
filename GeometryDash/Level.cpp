@@ -11,7 +11,7 @@ using std::string;
 
 Scene * Level::scene = nullptr;
 
-Level::Level(int level_number) : n(level_number) {}
+Level::Level(int level_number) : level_number(level_number) {}
 
 void Level::Init()
 {
@@ -20,8 +20,8 @@ void Level::Init()
     // cria gerenciador de cena
     scene = new Scene();
 
-    loadLevel(*this, window, "Level" + std::to_string(n) + ".txt");
-    GeometryDash::player->Level(n - 1);
+    loadLevel(*this, window, "Level" + std::to_string(level_number) + ".txt");
+    GeometryDash::player->Level(level_number - 1);
     GeometryDash::player->ResetPoints();
 
     // inicia com música
@@ -39,11 +39,11 @@ void Level::Update()
         GeometryDash::audio->Stop(MUSIC);
         GeometryDash::audio->Play(DIED);
         GeometryDash::GameOverL();
-        GeometryDash::player->Reset(n-1); 
+        GeometryDash::player->Reset(level_number-1); 
     }
-    else if (GeometryDash::player->Level() != n - 1 || window->KeyPress('N'))
+    else if (GeometryDash::player->Level() != level_number - 1 || window->KeyPress('N'))
     {
-        GeometryDash::player->Reset(n);
+        GeometryDash::player->Reset(level_number);
         GeometryDash::NextLevel();
     } 
 }

@@ -8,7 +8,7 @@
 class GameOver : public Game
 {
 private:
-    Sprite * title = nullptr;       // tela de fim
+    Sprite * title = nullptr;               // tela de fim
     Sprite * progress_bar = nullptr;
     Sprite * empty_bar = nullptr;
     Color  * progress_bar_color = nullptr;

@@ -7,9 +7,9 @@
 class Level : public Game
 {
 private:
+    int level_number;
 
 public:
-    int n;
     Background* backg = nullptr;   // pano de fundo animado
     static Scene* scene;           // cena do nível
     int num_ground_blocks = 0;
@@ -20,4 +20,9 @@ public:
     void Update();                  // atualiza lógica do jogo
     void Draw();                    // desenha jogo
     void Finalize();                // finalização do nível
+
+    int levelNumber();
 };
+
+inline int Level::levelNumber()
+{ return level_number; }
