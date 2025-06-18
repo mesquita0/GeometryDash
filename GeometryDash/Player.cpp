@@ -24,7 +24,7 @@ Player::Player()
     rotation = 0;
     run_animation = false;
     is_alive = true;
-    end_level = true;
+    stop_camera = true;
     points = 0;
     max_points = 1;
 
@@ -47,7 +47,7 @@ void Player::Reset()
     rotation = 0;
     run_animation = false;
     is_alive = true;
-    end_level = true;
+    stop_camera = true;
 }
 
 void Player::Reset(int level)
@@ -66,11 +66,11 @@ void Player::OnCollision(Object * obj)
         break;
 
     case _STOP_CAMERA:
-        end_level = true;
+        stop_camera = true;
         break;
 
     case _MOVE_CAMERA:
-        end_level = false;
+        stop_camera = false;
         break;
 
     case THORN:
@@ -135,7 +135,7 @@ void Player::Update()
 
     float dx = GeometryDash::game_speed * gameTime;
     points += dx;
-    if (end_level) 
+    if (stop_camera) 
         Translate(dx, 0);
 
     // ação da gravidade sobre o personagem

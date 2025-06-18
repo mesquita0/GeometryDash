@@ -13,9 +13,9 @@ private:
     float       rotation;
     bool        run_animation;
     bool        is_alive;
-    bool        end_level;
-    float        points;
-    float        max_points;
+    bool        stop_camera;
+    float       points;
+    float       max_points;
     
     void jump(int velocity);
 
@@ -33,7 +33,7 @@ public:
     float Height();                        
     float Width();                        
     bool  IsAlive();
-    bool  IsEndLevel();
+    bool  IsCameraStopped();
     float percentage();
 
     void maxPoints(float max_points);
@@ -67,7 +67,7 @@ inline float Player::Width() { return sprite->Width(); }
 
 inline bool Player::IsAlive() { return is_alive; }
 
-inline bool Player::IsEndLevel() { return end_level; }
+inline bool Player::IsCameraStopped() { return stop_camera; }
 
 inline float Player::percentage()
 { return points / max_points; }

@@ -23,7 +23,7 @@ Background::~Background()
 void Background::Update()
 {
     // move sprites 
-    if (!GeometryDash::player->IsEndLevel() || GeometryDash::loopEnvironment)
+    if (!GeometryDash::player->IsCameraStopped() || GeometryDash::loopEnvironment)
         this->Translate(-(GeometryDash::game_speed / 5.0f) * gameTime, 0);
 }
 

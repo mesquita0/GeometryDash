@@ -101,6 +101,6 @@ void WorldEntity::Update()
             Translate(dynamic_cast<Home*>(GeometryDash::current_level)->offsetGround() * entity->Width(), 0);
         }
     }
-    else if(!GeometryDash::player->IsEndLevel())
+    else if(!GeometryDash::player->IsCameraStopped())
         Translate(-GeometryDash::game_speed * gameTime, 0);
 }
