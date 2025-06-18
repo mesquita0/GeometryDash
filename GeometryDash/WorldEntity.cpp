@@ -1,5 +1,6 @@
 #include "WorldEntity.h"
 #include "GeometryDash.h"
+#include "Home.h"
 
 WorldEntity::WorldEntity(float posX, float posY, EntityTypeSprite platType, Color tint) : color(tint)
 {
@@ -91,15 +92,14 @@ WorldEntity::~WorldEntity()
 
 void WorldEntity::Update()
 {
-    // Home
-    if (GeometryDash::level_index == 0) {
-        // Move apenas objetos na visão
-        if (entity && this->x - entity->Width() / 2.0f < window->Width())
-            Translate(-GeometryDash::game_speed * gameTime, 0);
+    // Home, move apenas chão
+    if (GeometryDash::loopEnvironment && type == GROUND) {
+        Translate(-GeometryDash::game_speed * gameTime, 0);
 
         // Retorna objetos que sairam da tela
-        if (entity && this->x + entity->Width() / 2.0f < 0)
-            Translate(8 * entity->Width(), 0);
+        if (this->x + entity->Width() / 2.0f < 0) {
+            Translate(dynamic_cast<Home*>(GeometryDash::current_level)->offsetGround() * entity->Width(), 0);
+        }
     }
     else if(!GeometryDash::player->IsEndLevel())
         Translate(-GeometryDash::game_speed * gameTime, 0);

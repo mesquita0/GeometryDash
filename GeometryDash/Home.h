@@ -25,4 +25,9 @@ public:
     void Update();                  // atualiza lógica do jogo
     void Draw();                    // desenha jogo
     void Finalize();                // finaliza nível
+
+    int offsetGround();
 };
+
+inline int Home::offsetGround()
+{ return level1->num_ground_blocks; }

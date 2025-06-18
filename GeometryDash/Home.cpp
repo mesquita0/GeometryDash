@@ -15,6 +15,7 @@ Home::Home(Level* level1) {
 
 void Home::Init()
 {
+    GeometryDash::loopEnvironment = true;
     level1->Init();
     GeometryDash::audio->Stop(MUSIC);
 
@@ -66,5 +67,6 @@ void Home::Finalize()
     delete tileset;
 
     level1->scene->Add(GeometryDash::player, MOVING);
+    GeometryDash::loopEnvironment = false;
     GeometryDash::audio->Play(MUSIC, true);
 }

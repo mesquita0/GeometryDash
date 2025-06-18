@@ -23,7 +23,7 @@ Background::~Background()
 void Background::Update()
 {
     // move sprites 
-    if (!GeometryDash::player->IsEndLevel() || GeometryDash::level_index == 0)
+    if (!GeometryDash::player->IsEndLevel() || GeometryDash::loopEnvironment)
         this->Translate(-(GeometryDash::game_speed / 5.0f) * gameTime, 0);
 }
 

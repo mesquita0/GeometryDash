@@ -23,8 +23,6 @@ void GameOver::Init()
 
     playerPercentage = GeometryDash::player->percentage();
     progress_barX = (275 + 350 * playerPercentage) - progress_bar->Width() / 2.0f;
-
-    OutputDebugString(std::to_string(playerPercentage).c_str());
 }
 
 void GameOver::Update()

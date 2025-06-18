@@ -148,4 +148,6 @@ void Player::Update()
         if (rotation > 2 * M_PI)
             rotation -= 2 * M_PI;
     }
+
+    OutputDebugString(std::to_string(GeometryDash::loopEnvironment).c_str());
 }

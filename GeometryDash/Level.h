@@ -12,6 +12,7 @@ public:
     int n;
     Background* backg = nullptr;   // pano de fundo animado
     static Scene* scene;           // cena do nível
+    int num_ground_blocks = 0;
 
     Level(int level_number);
 

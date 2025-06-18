@@ -51,11 +51,13 @@ void loadLevel(Level& level, Window* window, const std::string& path) {
     fin >> cG;
     fin >> cB;
     int i = 0;
+    level.num_ground_blocks = 0;
     while (i < (length + window->Width())) {
         entity = new WorldEntity(i, ground_level, GROUND1, Color{ cR, cG, cB, 1 });
         entity->Translate(0, entity->Height() / 2.0f);
         level.scene->Add(entity, STATIC);
         i += entity->Width();
+        level.num_ground_blocks++;
     }
 
     level.scene->Add(new WorldEntity(player_start_offset, ground_level, MOVE_CAMERA, white), STATIC);
