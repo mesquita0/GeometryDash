@@ -22,6 +22,9 @@ void Home::Init()
     title = new Sprite("Resources/Title.png");
     play = new Sprite("Resources/PressEnter.png");
 
+    titleY = 85;
+    vel_titleY = 0;
+
     // Remover player da home
     level1->scene->Remove(GeometryDash::player, MOVING);
 
@@ -38,14 +41,19 @@ void Home::Update()
     if (window->KeyPress(VK_ESCAPE))
         window->Close();
 
-    // se a tecla ENTER for pressionada
-    if (window->KeyPress(VK_RETURN))
+    titleY += vel_titleY * gameTime;
+
+    // Passar para o level 1 quando o titulo sair da tela
+    if (titleY + title->Height() / 2.0f < 0)
     {
-        GeometryDash::audio->Stop(MENU);
-        GeometryDash::audio->Play(TRANSITION);
         GeometryDash::player->Level(0);
         GeometryDash::NextLevel();
-
+    }
+    else if (window->KeyPress(VK_RETURN)) // começar a transição pro level 1
+    {
+        vel_titleY = -500;
+        GeometryDash::audio->Stop(MENU);
+        GeometryDash::audio->Play(TRANSITION);
     }
     else
     {
@@ -57,7 +65,7 @@ void Home::Update()
 void Home::Draw()
 {
     level1->Draw();
-    title->Draw(window->CenterX(), 85, Layer::FRONT);
+    title->Draw(window->CenterX(), titleY, Layer::FRONT);
     anim->Draw(810, 275);
 }
 

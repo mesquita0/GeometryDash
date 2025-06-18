@@ -17,6 +17,8 @@ private:
     TileSet* tileset = nullptr;    // tileset da animação
     Animation* anim = nullptr;     // animação do menu
     Level* level1 = nullptr;
+    float titleY;
+    float vel_titleY;
 
 public:
     Home(Level* level1);
