@@ -98,7 +98,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     engine->window->Mode(WINDOWED);
     engine->window->Size(900, 450);
     engine->window->Color(30, 50, 80);
-    engine->window->Title("Geometry Dash");
+    engine->window->Title("Square Runner");
     engine->window->Icon(IDI_ICON);
     engine->window->Cursor(IDC_CURSOR);
     engine->graphics->VSync(true);
